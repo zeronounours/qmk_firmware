@@ -20,4 +20,5 @@
 
 #define ORYX_CONFIGURATOR
 // Number of ms between what is consider a tap and what is an hold
-#define TAPPING_TERM 150
+#define TAPPING_TERM 200
+#define PERMISSIVE_HOLD

@@ -52,7 +52,6 @@ enum custom_keycodes {
 
 // Tap Dance declarations
 enum {
-    TD_SPC_NBSPC,
     TD_SHF_ALT,
     __TD_END__,  // keep it at the end
 };
@@ -60,17 +59,22 @@ enum {
 extern bool g_suspend_state;
 extern rgb_config_t rgb_matrix_config;
 
+
+/****************************************
+ * KEY MAPPING
+ ***************************************/
+
 // make the transparent key macro longer
 #define ____________ KC_TRNS
 // key mapping
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BEPO__] = LAYOUT_moonlander(
-    BP_DLR       , BP_DQOT      , BP_LGIL      , BP_RGIL      , BP_LPRN      , BP_RPRN      , KC_HOME               ,          KC_PGUP      , BP_AT        , BP_PLUS      , BP_MINS      , BP_SLSH      , BP_ASTR      , BP_EQL       ,
+    LT(SYMBOL, BP_DLR) , BP_DQOT, BP_LGIL      , BP_RGIL      , BP_LPRN      , BP_RPRN      , KC_HOME               ,          KC_PGUP      , BP_AT        , BP_PLUS      , BP_MINS      , BP_SLSH      , BP_ASTR      , BP_EQL       ,
     KC_TAB       , BP_B         , BP_ECUT      , BP_P         , BP_O         , BP_EGRV      , KC_END                ,          KC_PGDOWN    , BP_DCRC      , BP_V         , BP_D         , BP_L         , BP_J         , BP_Z         ,
-    BP_W         , BP_A         , BP_U         , BP_I         , BP_E         , BP_COMM      , KC_INSERT             ,          KC_DELETE    , BP_C         , BP_T         , BP_S         , BP_R         , BP_N         , BP_M         ,
+    BP_W         , BP_A         , BP_U         , BP_I         , BP_E         , BP_COMM      , KC_INSERT             ,          ____________ , BP_C         , BP_T         , BP_S         , BP_R         , BP_N         , BP_M         ,
     KC_LSHIFT    , BP_AGRV      , BP_Y         , BP_X         , BP_DOT       , BP_K                                                         , BP_APOS      , BP_Q         , BP_G         , BP_H         , BP_F         , BP_CCED      ,
     KC_LCTRL     , MO(1)        , KC_RCTRL     , KC_LGUI      , KC_MEH       ,                MO(6)                 ,          KC_BSPACE                   , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , BP_PERC      ,
-                                                            TD(TD_SPC_NBSPC) , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(7)        , KC_ENTER     , TD(TD_SHF_ALT)
+                                                                KC_SPACE     , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(7)        , RALT_T(KC_ENTER) , TD(TD_SHF_ALT)
   ),
   [LAYERS] = LAYOUT_moonlander(
     ____________ , TO(0)        , TO(2)        , TO(3)        , TO(4)        , TO(5)        , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
@@ -81,9 +85,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                 ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________
   ),
   [SYMBOL] = LAYOUT_moonlander(
-    KC_ESCAPE    , KC_F1        , KC_F2        , KC_F3        , KC_F4        , KC_F5        , ____________          ,          ____________ , KC_F6        , KC_F7        , KC_F8        , KC_F9        , KC_F10       , KC_F11       ,
-    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , KC_UP        , KC_KP_7      , KC_KP_8      , KC_KP_9      , KC_KP_PLUS   , KC_F12       ,
-    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , KC_DOWN      , KC_KP_4      , KC_KP_5      , KC_KP_6      , KC_KP_MINUS  , ____________ ,
+    KC_ESCAPE    , KC_F1        , KC_F2        , KC_F3        , KC_F4        , KC_F5        , KC_HOME               ,          KC_PGUP      , KC_F6        , KC_F7        , KC_F8        , KC_F9        , KC_F10       , KC_F11       ,
+    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_END                ,          KC_PGDOWN    , KC_UP        , KC_KP_7      , KC_KP_8      , KC_KP_9      , KC_KP_PLUS   , KC_F12       ,
+    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_INSERT             ,          KC_DELETE    , KC_DOWN      , KC_KP_4      , KC_KP_5      , KC_KP_6      , KC_KP_MINUS  , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,                                                 ____________ , KC_KP_1      , KC_KP_2      , KC_KP_3    , KC_KP_ASTERISK , ____________ ,
     ____________ , TO(0)        , ____________ , ____________ , ____________ ,                ____________          ,          ____________                , KC_KP_0      , KC_KP_DOT    , KC_KP_EQUAL  , KC_KP_SLASH  , ____________ ,
                                                                 ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________
@@ -113,9 +117,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                 RGB_SLD      , TOGGLE_LAYER_COLOR , ____________    ,          ____________ , ____________ , ____________
   ),
   [TERM__] = LAYOUT_moonlander(
-    ____________ , LALT(FR_1)   , LALT(FR_2)   , LALT(FR_3)   , LALT(FR_4)   , LALT(FR_5)   , ____________          ,         LSFT(KC_PGUP) , LALT(FR_6)   , LALT(FR_7)   , LALT(FR_8)   , LALT(FR_9)   , LALT(FR_0)   , ____________ ,
-    ____________ , LALT(FR_A)   , LALT(FR_Z)   , LALT(KC_E)   , LALT(KC_R)   , ____________ , ____________          ,          KC_PGDOWN    , LCTL(LSFT(BP_C)) , LCTL(LSFT(BP_V)) , ____________ , ____________ , ____________ , ____________ ,
-    ____________ , LALT(FR_Q)   , LALT(KC_S)   , LALT(KC_D)   , LALT(KC_F)   , ____________ , ____________          ,          ____________ , LALT(KC_H)   , LALT(KC_J)   , LALT(KC_K)   , LALT(KC_L)   , LALT(FR_M)   , ____________ ,
+    ____________ , LALT(KC_1)   , LALT(KC_2)   , LALT(KC_3)   , LALT(KC_4)   , LALT(KC_5)   , ____________          ,         LSFT(KC_PGUP) , LALT(KC_6)   , LALT(KC_7)   , LALT(KC_8)   , LALT(KC_9)   , LALT(KC_0)   , ____________ ,
+    ____________ , LALT(FR_A)   , LALT(FR_Z)   , LALT(KC_E)   , LALT(KC_R)   , ____________ , ____________          ,       LSFT(KC_PGDOWN) , LCTL(LSFT(BP_C)) , LCTL(LSFT(BP_V)) , ____________ , ____________ , ____________ , ____________ ,
+    ____________ , LALT(FR_Q)   , LALT(KC_S)   , LALT(KC_D)   , LALT(KC_F)   , ____________ , LSFT(KC_INSERT)       ,          ____________ , LALT(KC_H)   , LALT(KC_J)   , LALT(KC_K)   , LALT(KC_L)   , LALT(FR_M)   , ____________ ,
     ____________ , ____________ , LALT(KC_X)   , LALT(KC_C)   , LALT(KC_V)   , ____________ ,                                                 ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ ,                ____________          ,          ____________                , ____________ , ____________ , ____________ , ____________ , ____________ ,
                                                               LALT(KC_SPACE) , ____________ , ____________          ,          ____________ , LALT(KC_ENTER) , ____________
@@ -144,6 +148,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // undefine transparency
 #undef ____________
 
+
+
+/****************************************
+ * COLOR MAPPING
+ ***************************************/
 
 /*
  * The following mapping is to be used to defined the colors of the keys
@@ -230,9 +239,9 @@ const uint8_t PROGMEM ledmap[__LAYER_END__][DRIVER_LED_TOTAL][3] = {
                                                                 ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________
   ),
   [SYMBOL] = COL_LAYOUT_moonlander(
-    ____________ , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        , ____________          ,          ____________ , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        ,
-    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , C_YELLOW     , C_YELLOW     , C_YELLOW     , C_LIGHT_PURPLE , C_RED        ,
-    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , C_YELLOW     , C_YELLOW     , C_YELLOW     , C_LIGHT_PURPLE , ____________ ,
+    ____________ , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        , C_GREEN               ,           C_GREEN     , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        , C_RED        ,
+    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , C_GREEN               ,           C_GREEN     , ____________ , C_YELLOW     , C_YELLOW     , C_YELLOW     , C_LIGHT_PURPLE , C_RED        ,
+    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , C_GREEN               ,           C_GREEN     , ____________ , C_YELLOW     , C_YELLOW     , C_YELLOW     , C_LIGHT_PURPLE , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,                                                 ____________ , C_YELLOW     , C_YELLOW     , C_YELLOW     , C_LIGHT_PURPLE , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ ,                ____________          ,          ____________                , C_YELLOW     , C_LIGHT_PURPLE , C_LIGHT_PURPLE , C_LIGHT_PURPLE , ____________ ,
                                                                 ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________
@@ -254,6 +263,8 @@ const uint8_t PROGMEM ledmap[__LAYER_END__][DRIVER_LED_TOTAL][3] = {
     ____________ , ____________ , ____________ , ____________ , ____________ ,                C_ORANGE              ,           C_ORANGE                   , ____________ , ____________ , ____________ , ____________ , ____________ ,
                                                                 C_ORANGE     , C_ORANGE     , ____________          ,          ____________ , ____________ , ____________
   ),
+  [TERM__] = MAP_ALL_KEYS(C_TRANS),
+  [VIM___] = MAP_ALL_KEYS(C_TRANS),
 /*
  * Add the following line for new layers
  *
@@ -333,6 +344,11 @@ void rgb_matrix_indicators_user(void) {
 }
 
 
+
+/****************************************
+ * CUSTOM KEYS
+ ***************************************/
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case MC_VIM_P_TAB:
@@ -405,91 +421,134 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
+/****************************************
+ * TAP DANCE
+ ***************************************/
+
+// adaptation of the code from QMK doc
+typedef enum {
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_SINGLE_HOLD,
+    TD_DOUBLE_TAP,
+    TD_DOUBLE_HOLD,
+    TD_DOUBLE_SINGLE_TAP, // Send two single taps
+    TD_TRIPLE_TAP,
+    TD_TRIPLE_HOLD
+} td_state_t;
+
 typedef struct {
-    bool is_press_action;
-    uint8_t step;
-} tap;
+    td_state_t state;
+} td_tap_t;
 
-enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-    DOUBLE_SINGLE_TAP,
-    MORE_TAPS
-};
-
-static tap dance_state[__TD_END__];
-
-uint8_t dance_step(qk_tap_dance_state_t *state);
-
-uint8_t dance_step(qk_tap_dance_state_t *state) {
+/* Return an integer that corresponds to what kind of tap dance should be executed.
+ *
+ * How to figure out tap dance state: interrupted and pressed.
+ *
+ * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
+ *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
+ *
+ * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
+ *  has ended, but the key is still being pressed down. This generally means the key is being "held".
+ *
+ * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
+ *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
+ *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
+ *
+ * Good places to put an advanced tap dance:
+ *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
+ *
+ * Criteria for "good placement" of a tap dance key:
+ *  Not a key that is hit frequently in a sentence
+ *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
+ *    in a web form. So 'tab' would be a poor choice for a tap dance.
+ *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
+ *    letter 'p', the word 'pepper' would be quite frustating to type.
+ *
+ * For the third point, there does exist the 'TD_DOUBLE_SINGLE_TAP', however this is not fully tested
+ *
+ */
+td_state_t cur_dance(qk_tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return SINGLE_TAP;
-        else return SINGLE_HOLD;
+        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+        // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
+        else return TD_SINGLE_HOLD;
     } else if (state->count == 2) {
-        if (state->interrupted) return DOUBLE_SINGLE_TAP;
-        else if (state->pressed) return DOUBLE_HOLD;
-        else return DOUBLE_TAP;
+        // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
+        // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
+        // keystrokes of the key, and not the 'double tap' action/macro.
+        if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
+        else if (state->pressed) return TD_DOUBLE_HOLD;
+        else return TD_DOUBLE_TAP;
     }
-    return MORE_TAPS;
+
+    // Assumes no one is trying to type the same letter three times (at least not quickly).
+    // If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
+    // an exception here to return a 'TD_TRIPLE_SINGLE_TAP', and define that enum just like 'TD_DOUBLE_SINGLE_TAP'
+    if (state->count == 3) {
+        if (state->interrupted || !state->pressed) return TD_TRIPLE_TAP;
+        else return TD_TRIPLE_HOLD;
+    } else return TD_UNKNOWN;
 }
 
+static td_tap_t dance_state[__TD_END__];
 
-void on_td_spc_nbspc(qk_tap_dance_state_t *state, void *user_data);
-void td_spc_nbspc_finished(qk_tap_dance_state_t *state, void *user_data);
-void td_spc_nbspc_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void on_td_spc_nbspc(qk_tap_dance_state_t *state, void *user_data) {
-    if(state->count == 3) {
-        tap_code16(KC_SPACE);
-        tap_code16(KC_SPACE);
-        tap_code16(KC_SPACE);
-    }
-    if(state->count > 3) {
-        tap_code16(KC_SPACE);
-    }
+/*
+ * The following macros can be used to have Tap Dance to:
+ * - hold mod1 on first press and hold (permissive hold)
+ * - hold mod2 on second press and hold (permissive hold)
+ * - hold mod3 on third press and hold (permissive hold)
+ *
+ * Usage:
+ *   TD_MOD(TD_KEY_NAME, MOD(mod1), MOD(mod2), MOD(mod3))
+ *   TD_MOD2(TD_KEY_NAME, mod1, mod2) --> same as TD_MOD but for 2 mods only
+ *   MOD(mod) --> create the modifier for TD_MODE
+ *   MOD2(mod1, mod2)  --> same as MOD, but sending 2 modifiers
+ *   MOD3(mod1, mod2, mod3)  --> same as MOD, but sending 3 modifiers
+ *   TD_MOD_REF(TD_KEY_NAME)
+ *
+ */
+#define _TD_MOD(name, reg_mod1, unreg_mod1, reg_mod2, unreg_mod2, reg_mod3, unreg_mod3)  \
+void x_tap_##name(qk_tap_dance_state_t *state, void *user_data) { \
+    switch (state->count) { \
+        case 1: \
+            reg_mod1; \
+            dance_state[name].state = TD_SINGLE_HOLD; \
+            break; \
+        case 2: \
+            unreg_mod1; \
+            reg_mod2; \
+            dance_state[name].state = TD_DOUBLE_HOLD; \
+            break; \
+        case 3: \
+        default: \
+            unreg_mod2; \
+            reg_mod3; \
+            dance_state[name].state = TD_TRIPLE_HOLD; \
+            break; \
+    } \
+} \
+void x_reset_##name(qk_tap_dance_state_t *state, void *user_data) { \
+    switch (dance_state[name].state) { \
+        case TD_SINGLE_HOLD: unreg_mod1; break; \
+        case TD_DOUBLE_HOLD: unreg_mod2; break; \
+        case TD_TRIPLE_HOLD: unreg_mod3; break; \
+        default: break; \
+    } \
+    dance_state[name].state = TD_NONE; \
 }
+#define TD_MOD(...)  _TD_MOD(__VA_ARGS__)
+#define _TD_MOD2(name, r1, u1, r2, u2)  TD_MOD(name, r1, u1, r2, u2, r2, u2)
+#define TD_MOD2(...)  _TD_MOD2(__VA_ARGS__)
+#define MOD(mod) { register_code(KC_##mod); }, { unregister_code(KC_##mod); }
+#define MOD2(mod1, mod2) { register_code(KC_##mod1); register_code(KC_##mod2); }, { unregister_code(KC_##mod1); unregister_code(KC_##mod2); }
+#define MOD3(mod1, mod2, mod3) { register_code(KC_##mod1); register_code(KC_##mod2); register_code(KC_##mod3); }, { unregister_code(KC_##mod1); unregister_code(KC_##mod2); unregister_code(KC_##mod3); }
+#define TD_MOD_REF(name) ACTION_TAP_DANCE_FN_ADVANCED(x_tap_##name, NULL, x_reset_##name)
 
-void td_spc_nbspc_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_SPC_NBSPC].step = dance_step(state);
-    switch (dance_state[TD_SPC_NBSPC].step) {
-        case SINGLE_TAP: register_code16(KC_SPACE); break;
-        case DOUBLE_TAP: register_code16(LSFT(RALT(KC_SPACE))); break;
-        case DOUBLE_SINGLE_TAP: tap_code16(KC_SPACE); register_code16(KC_SPACE);
-    }
-}
-
-void td_spc_nbspc_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_SPC_NBSPC].step) {
-        case SINGLE_TAP: unregister_code16(KC_SPACE); break;
-        case DOUBLE_TAP: unregister_code16(LSFT(RALT(KC_SPACE))); break;
-        case DOUBLE_SINGLE_TAP: unregister_code16(KC_SPACE); break;
-    }
-    dance_state[TD_SPC_NBSPC].step = 0;
-}
-void td_shf_alt_finished(qk_tap_dance_state_t *state, void *user_data);
-void td_shf_alt_reset(qk_tap_dance_state_t *state, void *user_data);
-
-void td_shf_alt_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_SHF_ALT].step = dance_step(state);
-    switch (dance_state[TD_SHF_ALT].step) {
-        case SINGLE_HOLD: register_code16(KC_RSHIFT); break;
-        case DOUBLE_HOLD: register_code16(KC_RALT); break;
-    }
-}
-
-void td_shf_alt_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_SHF_ALT].step) {
-        case SINGLE_HOLD: unregister_code16(KC_RSHIFT); break;
-        case DOUBLE_HOLD: unregister_code16(KC_RALT); break;
-    }
-    dance_state[TD_SHF_ALT].step = 0;
-}
+TD_MOD2(TD_SHF_ALT, MOD(RSFT), MOD2(RSFT, RALT))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-        [TD_SPC_NBSPC] = ACTION_TAP_DANCE_FN_ADVANCED(on_td_spc_nbspc, td_spc_nbspc_finished, td_spc_nbspc_reset),
-        [TD_SHF_ALT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_shf_alt_finished, td_shf_alt_reset),
+        [TD_SHF_ALT] = TD_MOD_REF(TD_SHF_ALT),
 };
