@@ -1,6 +1,7 @@
 /* Copyright 2020 ZSA Technology Labs, Inc <@zsa>
  * Copyright 2020 Jack Humbert <jack.humb@gmail.com>
  * Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
+ * Copyright 2021 Gauthier Sebaux <github@zeronounours.eu> (@zeronounours)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +27,8 @@
 enum layers {
     BEPO__,     // default layer for bépo layouts
     B4AZER,     // bépo layout for azerty keyboards
+    B4AZ_A,     // bépo layout for azerty keyboards — AltGr version
+    B4AZ_S,     // bépo layout for azerty keyboards — shifted version
     SYMBOL,     // Layer with symbols
     MEDIA_,     // media keys
     COLORS,     // Manage the colors of the keyboards
@@ -50,6 +53,7 @@ enum custom_keycodes {
     MC_VIM_SAVE,
     MC_VIM_SV_QT,
     MC_VIM_QUIT,
+    FR_TRIPLE_DOT,
 };
 
 // Tap Dance declarations
@@ -114,31 +118,91 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Keymap B4AZER: The base layer to type as bépo on an azerty layout
 //
 //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-//│LT(SYM,$)│  " / 1  │  < / 2  │  > / 3  │  ( / 4  │  ) / 5  │   HOME  │             │  PG UP  │  @ / 6  │  + / 7  │  - / 8  │  / / 9  │  * / 0  │    =    │
+//│LT(SYM,$)│    "    │    <    │    >    │    (    │    )    │   HOME  │             │  PG UP  │    @    │    +    │    -    │    /    │    *    │    =    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//│   TAB   │    B    │    É    │    P    │    O    │    È    │   END   │             │ PG DOWN │    ^    │    V    │    D    │    L    │    J    │    Z    │
+//│   TAB   │    b    │    é    │    p    │    o    │    è    │   END   │             │ PG DOWN │    ^    │    v    │    d    │    l    │    j    │    z    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//│    W    │    A    │    U    │    I    │    E    │    ,    │  INSERT │             │         │    C    │    T    │    S    │    R    │    N    │    M    │
+//│    w    │    u    │    u    │    i    │    e    │    ,    │  INSERT │             │         │    c    │    t    │    s    │    r    │    n    │    m    │
 //├─────────┼─────────┼─────────┼─────────┼───═══───┼─────────┼─────────┘             └─────────┼─────────┼───═══───┼─────────┼─────────┼─────────┼─────────┤
-//│ LSHIFT  │    À    │    Y    │    X    │    :    │    K    │                                 │    '    │    Q    │    G    │    H    │    F    │    Ç    │
+//│ LSHIFT  │    à    │    y    │    x    │    .    │    k    │                                 │    '    │    q    │    g    │    h    │    f    │    ç    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┘                                 └─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //│  LCTRL  │ Layers  │  RCTRL  │   Win   │   Meh   │  ╔═════════════╗                   ╔═════════════╗  │    ⇦    │    ⇩    │    ⇧    │    ⇨    │    %    │
 //└─────────┴─────────┴─────────┴─────────┴─────────┘  ║  Terminal   ║                   ║  Backspace  ║  └─────────┴─────────┴─────────┴─────────┴─────────┘
 //                                                     ║             ║                   ║             ║
 //                                                     ╠══════╦══════╬══════╗     ╔══════╬══════╦══════╣
-//                                                     ║      ║      ║      ║     ║      ║      ║1 tap ║
+//                                                     ║      ║      ║      ║     ║      ║      ║      ║
 //                                                     ║Space ║ LALT ║Escape║     ║ Vim  ║Enter ║RSHIFT║
-//                                                     ║      ║      ║  --  ║     ║      ║  --  ║2 tap ║
-//                                                     ║      ║      ║LCTRL ║     ║      ║ RALT ║S+RALT║
+//                                                     ║      ║      ║  --  ║     ║      ║  --  ║      ║
+//                                                     ║      ║      ║LCTRL ║     ║      ║ RALT ║      ║
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [B4AZER] = LAYOUT_moonlander(
-    LT(SYMBOL, FR_DLR), FR_QUOT , FR_LESS      , FR_GRTR      , FR_LPRN      , FR_RPRN      , KC_HOME               ,          KC_PGUP      , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
+    LT(SYMBOL, FR_DLR), FR_DQUO , FR_LESS      , FR_GRTR      , FR_LPRN      , FR_RPRN      , KC_HOME               ,          KC_PGUP      , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
     KC_TAB       , KC_B         , FR_EACU      , KC_P         , KC_O         , FR_EGRV      , KC_END                ,          KC_PGDOWN    , FR_CCIRC     , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
     FR_W         , FR_A         , KC_U         , KC_I         , KC_E         , FR_COMM      , KC_INSERT             ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , KC_N         , FR_M         ,
-    KC_LSHIFT    , FR_AGRV      , KC_Y         , KC_X         , FR_DOT       , KC_K         ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
-    KC_LCTRL     , MO(LAYERS)   , KC_RCTRL     , KC_LGUI      , KC_MEH       ,                MO(TERM__)            ,          KC_BSPACE                   , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , BP_PERC      ,
-                                                                KC_SPACE     , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , RALT_T(KC_ENTER) , TD(TD_SHF_ALT)
+    MO(B4AZ_S)   , FR_AGRV      , KC_Y         , KC_X         , FR_DOT       , KC_K         ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
+    KC_LCTRL     , MO(LAYERS)   , KC_RCTRL     , KC_LGUI      , KC_MEH       ,                MO(TERM__)            ,          KC_BSPACE                   , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , FR_PERC      ,
+                                                                KC_SPACE     , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , LT(B4AZ_A, KC_ENTER) , MO(B4AZ_S)
+  ),
+//
+// Keymap B4AZ_A: The AltGr-ed layer to type as bépo on an azerty layout
+//
+//┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+//│LT(SYM,$)│    "    │    <    │    >    │    [    │    ]    │         │             │         │    @    │    +    │    -    │    /    │    *    │    =    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│         │    |    │    é    │    &    │    o    │    e    │         │             │         │    ^    │    v    │    d    │    l    │    j    │    z    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│    w    │    a    │    ù    │  Trema  │    €    │    ,    │         │             │         │    c    │    t    │    s    │    r    │    ~    │    m    │
+//├─────────┼─────────┼─────────┼─────────┼───═══───┼─────────┼─────────┘             └─────────┼─────────┼───═══───┼─────────┼─────────┼─────────┼─────────┤
+//│ LSHIFT  │    \    │    {    │    }    │    …    │    ~    │                                 │    '    │    q    │    g    │    h    │    f    │    ç    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┘                                 └─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│         │ Layers  │         │         │         │  ╔═════════════╗                   ╔═════════════╗  │         │         │         │         │    %    │
+//└─────────┴─────────┴─────────┴─────────┴─────────┘  ║  Terminal   ║                   ║             ║  └─────────┴─────────┴─────────┴─────────┴─────────┘
+//                                                     ║             ║                   ║             ║
+//                                                     ╠══════╦══════╬══════╗     ╔══════╬══════╦══════╣
+//                                                     ║      ║      ║      ║     ║      ║ ---- ║      ║
+//                                                     ║Under ║      ║      ║     ║ Vim  ║ ---- ║RSHIFT║
+//                                                     ║score ║      ║      ║     ║      ║ ---- ║      ║
+//                                                     ║      ║      ║      ║     ║      ║ ---- ║      ║
+//                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
+//
+  [B4AZ_A] = LAYOUT_moonlander(
+    LT(SYMBOL, FR_DLR), FR_DQUO , FR_LESS      , FR_GRTR      , FR_LBRC      , FR_RBRC      , ____________          ,          ____________ , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
+    ____________ , FR_PIPE      , FR_EACU      , FR_AMP       , KC_O         , FR_EGRV      , ____________          ,          ____________ , KC_LBRC      , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
+    FR_W         , FR_A         , FR_UGRV      , S(KC_LBRC)   , FR_EURO      , FR_COMM      , ____________          ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , FR_TILD      , FR_M         ,
+    MO(B4AZ_S)   , FR_BSLS      , FR_LCBR      , FR_RCBR      , FR_TRIPLE_DOT, FR_TILD      ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
+    ____________ , MO(LAYERS)   , ____________ , ____________ , ____________ ,                MO(TERM__)            ,          ____________                , ____________ , ____________ , ____________ , ____________ , BP_PERC      ,
+                                                                FR_UNDS      , ____________ , ____________          ,          MO(VIM___)   , ____________ , MO(B4AZ_S)
+  ),
+//
+// Keymap B4AZ_S: The Shifted layer to type as bépo on an azerty layout
+//
+//┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+//│    #    │    1    │    2    │    3    │    4    │    5    │         │             │ S(PG UP)│    6    │    7    │    8    │    9    │    0    │    °    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│   TAB   │    B    │    E    │    P    │    O    │    È    │         │             │ S(PG DN)│    !    │    V    │    D    │    L    │    J    │    Z    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│    W    │    A    │    U    │    I    │    E    │    ;    │S(INSERT)│             │         │    C    │    T    │    S    │    R    │    N    │    M    │
+//├─────────┼─────────┼─────────┼─────────┼───═══───┼─────────┼─────────┘             └─────────┼─────────┼───═══───┼─────────┼─────────┼─────────┼─────────┤
+//│ ------- │    A    │    Y    │    X    │    :    │    K    │                                 │    ?    │    Q    │    G    │    H    │    F    │    C    │
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┘                                 └─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+//│  LCTRL  │ Layers  │  RCTRL  │   Win   │   Meh   │  ╔═════════════╗                   ╔═════════════╗  │    ⇦    │    ⇩    │    ⇧    │    ⇨    │    `    │
+//└─────────┴─────────┴─────────┴─────────┴─────────┘  ║  Terminal   ║                   ║  Backspace  ║  └─────────┴─────────┴─────────┴─────────┴─────────┘
+//                                                     ║             ║                   ║             ║
+//                                                     ╠══════╦══════╬══════╗     ╔══════╬══════╦══════╣
+//                                                     ║      ║      ║      ║     ║      ║      ║ ---- ║
+//                                                     ║Space ║ LALT ║Escape║     ║ Vim  ║Enter ║ ---- ║
+//                                                     ║      ║      ║  --  ║     ║      ║      ║ ---- ║
+//                                                     ║      ║      ║LCTRL ║     ║      ║      ║ ---- ║
+//                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
+//
+  [B4AZ_S] = LAYOUT_moonlander(
+    FR_HASH      , FR_1   , FR_2         , FR_3         , FR_4         , FR_5         , ____________          ,          S(KC_PGUP)   , FR_6         , FR_7         , FR_8         , FR_9         , FR_0         , FR_OVRR      ,
+    S(KC_TAB)    , S(KC_B)      , S(FR_E)      , S(KC_P)      , S(KC_O)      , S(KC_E)      , ____________          ,          S(KC_PGDOWN) , FR_EXLM      , S(KC_V)      , S(KC_D)      , S(KC_L)      , S(KC_J)      , S(FR_Z)      ,
+    S(FR_W)      , S(FR_A)      , S(KC_U)      , S(KC_I)      , S(KC_E)      , FR_SCLN      , S(KC_INSERT)          ,          ____________ , S(KC_C)      , S(KC_T)      , S(KC_S)      , S(KC_R)      , S(KC_N)      , S(FR_M)      ,
+    ____________ , S(FR_A)      , S(KC_Y)      , S(KC_X)      , FR_COLN      , S(KC_K)      ,                                                 FR_QUES      , S(FR_Q)      , S(KC_G)      , S(KC_H)      , S(KC_F)      , S(KC_C)      ,
+    S(KC_LCTRL)  , MO(LAYERS)   , S(KC_RCTRL)  , S(KC_LGUI)   , S(KC_MEH)    ,                MO(TERM__)            ,          ____________                , S(KC_LEFT)   , S(KC_DOWN)   , S(KC_UP)     , S(KC_RIGHT)  , FR_GRV       ,
+                                                                ____________ , S(KC_LALT)   , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , S(KC_ENTER)  , ____________
   ),
 //
 // Keymap LAYERS: a layer dedicated to the activation of alternative layers
@@ -376,6 +440,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_clear();
             }
             return false; // Skip all further processing of this key
+
+        case FR_TRIPLE_DOT:
+            if (record->event.pressed) {
+                SEND_STRING("<<<");
+            }
+            break;
+
         case MC_VIM_P_TAB:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_TAP(X_COMMA) SS_DELAY(100) SS_TAP(X_Q));
@@ -401,11 +472,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_DOT)) SS_DELAY(100) SS_TAP(X_M) SS_DELAY(100) SS_TAP(X_A)  SS_DELAY(100) SS_TAP(X_ENTER));
             }
             break;
+
         case RGB_SLD:
             if (record->event.pressed) {
                 rgblight_mode(1);
             }
             return false;
+
         case COLOR_BLUE:
             if (record->event.pressed) {
                 rgblight_mode(1);
@@ -540,6 +613,8 @@ uint32_t layer_state_set_user(uint32_t state) {
 const uint8_t PROGMEM ledmap[__LAYER_END__][DRIVER_LED_TOTAL][3] = {
   [BEPO__] = MAP_ALL_KEYS(C_LIGHT_RED),
   [B4AZER] = MAP_ALL_KEYS(C_LIGHT_BLUE),
+  [B4AZ_A] = MAP_ALL_KEYS(C_TRANS),
+  [B4AZ_S] = MAP_ALL_KEYS(C_TRANS),
 #define ____________ C_BLACK
   [LAYERS] = COL_LAYOUT_moonlander(
     ____________ , C_LIGHT_RED  , C_GREEN      , C_BLUE       , C_LIGHT_BLUE , C_ORANGE     , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
