@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //│         │    |    │    é    │    &    │    o    │    e    │         │             │         │    ^    │    v    │    d    │    l    │    j    │    z    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//│    w    │    a    │    ù    │  Trema  │    €    │    ,    │         │             │         │    c    │    t    │    s    │    r    │    ~    │    m    │
+//│    w    │    a    │    ù    │  Trema  │    €    │    '    │         │             │         │    c    │    t    │    s    │    r    │    ~    │    m    │
 //├─────────┼─────────┼─────────┼─────────┼───═══───┼─────────┼─────────┘             └─────────┼─────────┼───═══───┼─────────┼─────────┼─────────┼─────────┤
 //│ LSHIFT  │    \    │    {    │    }    │    …    │    ~    │                                 │    '    │    q    │    g    │    h    │    f    │    ç    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┘                                 └─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -169,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [B4AZ_A] = LAYOUT_moonlander(
     LT(SYMBOL, FR_DLR), FR_DQUO , FR_LESS      , FR_GRTR      , FR_LBRC      , FR_RBRC      , ____________          ,          ____________ , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
     ____________ , FR_PIPE      , FR_EACU      , FR_AMP       , KC_O         , FR_EGRV      , ____________          ,          ____________ , KC_LBRC      , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
-    FR_W         , FR_A         , FR_UGRV      , S(KC_LBRC)   , FR_EURO      , FR_COMM      , ____________          ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , FR_TILD      , FR_M         ,
+    FR_W         , FR_A         , FR_UGRV      , S(KC_LBRC)   , FR_EURO      , FR_APOS      , ____________          ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , FR_TILD      , FR_M         ,
     MO(B4AZ_S)   , FR_BSLS      , FR_LCBR      , FR_RCBR      , FR_TRIPLE_DOT, FR_TILD      ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
     ____________ , MO(LAYERS)   , ____________ , ____________ , ____________ ,                MO(TERM__)            ,          ____________                , ____________ , ____________ , ____________ , ____________ , BP_PERC      ,
                                                                 FR_UNDS      , ____________ , ____________          ,          MO(VIM___)   , ____________ , MO(B4AZ_S)
@@ -197,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [B4AZ_S] = LAYOUT_moonlander(
-    FR_HASH      , FR_1   , FR_2         , FR_3         , FR_4         , FR_5         , ____________          ,          S(KC_PGUP)   , FR_6         , FR_7         , FR_8         , FR_9         , FR_0         , FR_OVRR      ,
+    FR_HASH      , FR_1         , FR_2         , FR_3         , FR_4         , FR_5         , ____________          ,          S(KC_PGUP)   , FR_6         , FR_7         , FR_8         , FR_9         , FR_0         , FR_OVRR      ,
     S(KC_TAB)    , S(KC_B)      , S(FR_E)      , S(KC_P)      , S(KC_O)      , S(KC_E)      , ____________          ,          S(KC_PGDOWN) , FR_EXLM      , S(KC_V)      , S(KC_D)      , S(KC_L)      , S(KC_J)      , S(FR_Z)      ,
     S(FR_W)      , S(FR_A)      , S(KC_U)      , S(KC_I)      , S(KC_E)      , FR_SCLN      , S(KC_INSERT)          ,          ____________ , S(KC_C)      , S(KC_T)      , S(KC_S)      , S(KC_R)      , S(KC_N)      , S(FR_M)      ,
     ____________ , S(FR_A)      , S(KC_Y)      , S(KC_X)      , FR_COLN      , S(KC_K)      ,                                                 FR_QUES      , S(FR_Q)      , S(KC_G)      , S(KC_H)      , S(KC_F)      , S(KC_C)      ,
