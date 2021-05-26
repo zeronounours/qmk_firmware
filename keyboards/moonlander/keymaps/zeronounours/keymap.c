@@ -523,7 +523,7 @@ uint32_t layer_state_set_user(uint32_t state) {
     //  © konstantin
     bool numpad = IS_LAYER_ON_STATE(state, SYMBOL);
     bool num_lock = IS_HOST_LED_ON(USB_LED_NUM_LOCK);
-    if (numpad != num_lock) {
+    if (numpad && ! num_lock) {
          tap_code(KC_NLCK);  // Toggle Num Lock to match Numpad layer state
     }
 
