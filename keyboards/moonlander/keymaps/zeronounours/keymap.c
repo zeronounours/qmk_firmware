@@ -42,7 +42,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    RGB_SLD = ML_SAFE_RANGE,
+    RGB_SLD = SAFE_RANGE,
     COLOR_RED,
     COLOR_BLUE,
     COLOR_GREEN,
@@ -65,7 +65,6 @@ enum {
     __TD_END__,  // keep it at the end
 };
 
-extern bool g_suspend_state;
 extern rgb_config_t rgb_matrix_config;
 
 // To know whether word mode is enabled
@@ -115,18 +114,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [BEPO__] = LAYOUT_moonlander(
-    LT(SYMBOL, BP_DLR) , BP_DQOT, BP_LGIL      , BP_RGIL      , BP_LPRN      , BP_RPRN      , KC_HOME               ,          KC_PGUP      , BP_AT        , BP_PLUS      , BP_MINS      , BP_SLSH      , BP_ASTR      , BP_EQL       ,
-    KC_TAB       , BP_B         , BP_ECUT      , BP_P         , BP_O         , BP_EGRV      , KC_END                ,          KC_PGDOWN    , BP_DCRC      , BP_V         , BP_D         , BP_L         , BP_J         , BP_Z         ,
+    LT(SYMBOL, BP_DLR) , BP_DQUO, BP_LDAQ      , BP_RDAQ      , BP_LPRN      , BP_RPRN      , KC_HOME               ,          KC_PGUP      , BP_AT        , BP_PLUS      , BP_MINS      , BP_SLSH      , BP_ASTR      , BP_EQL       ,
+    KC_TAB       , BP_B         , BP_EACU      , BP_P         , BP_O         , BP_EGRV      , KC_END                ,          KC_PGDN      , BP_DCIR      , BP_V         , BP_D         , BP_L         , BP_J         , BP_Z         ,
     BP_W         , BP_A         , BP_U         , BP_I         , BP_E         , BP_COMM      , KC_INSERT             ,          ____________ , BP_C         , BP_T         , BP_S         , BP_R         , BP_N         , BP_M         ,
-    KC_LSHIFT    , BP_AGRV      , BP_Y         , BP_X         , BP_DOT       , BP_K                                                         , BP_APOS      , BP_Q         , BP_G         , BP_H         , BP_F         , BP_CCED      ,
-    KC_LCTRL     , MO(LAYERS)   , KC_RCTRL     , KC_LGUI      , KC_MEH       ,                MO(TERM__)            ,          KC_BSPACE                   , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , BP_PERC      ,
+    KC_LSFT      , BP_AGRV      , BP_Y         , BP_X         , BP_DOT       , BP_K                                                         , BP_QUOT      , BP_Q         , BP_G         , BP_H         , BP_F         , BP_CCED      ,
+    KC_LCTL      , MO(LAYERS)   , KC_RCTL      , KC_LGUI      , KC_MEH       ,                MO(TERM__)            ,          KC_BSPC                     , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , BP_PERC      ,
                                                                 KC_SPACE     , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , RALT_T(KC_ENTER) , TD(TD_SHF_ALT)
   ),
 //
 // Keymap B4AZER: The base layer to type as bépo on an azerty layout
 //
 //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-//│LT(SYM,$)│    "    │    <    │    >    │    (    │    )    │   HOME  │             │  PG UP  │    @    │    +    │    -    │    /    │    *    │    =    │
+//│LT(SYM,$)│    "    │    "    │    "    │    (    │    )    │   HOME  │             │  PG UP  │    @    │    +    │    -    │    /    │    *    │    =    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //│   TAB   │    b    │    é    │    p    │    o    │    è    │   END   │             │ PG DOWN │    ^    │    v    │    d    │    l    │    j    │    z    │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -145,11 +144,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [B4AZER] = LAYOUT_moonlander(
-    LT(SYMBOL, FR_DLR), FR_DQUO , FR_LESS      , FR_GRTR      , FR_LPRN      , FR_RPRN      , KC_HOME               ,          KC_PGUP      , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
-    KC_TAB       , KC_B         , FR_EACU      , KC_P         , KC_O         , FR_EGRV      , KC_END                ,          KC_PGDOWN    , FR_CCIRC     , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
+    LT(SYMBOL, FR_DLR), FR_DQUO , FR_DQUO      , FR_DQUO      , FR_LPRN      , FR_RPRN      , KC_HOME               ,          KC_PGUP      , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
+    KC_TAB       , KC_B         , FR_EACU      , KC_P         , KC_O         , FR_EGRV      , KC_END                ,          KC_PGDN      , FR_CIRC      , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
     FR_W         , FR_A         , KC_U         , KC_I         , KC_E         , FR_COMM      , KC_INSERT             ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , KC_N         , FR_M         ,
-    MO(B4AZ_S)   , FR_AGRV      , KC_Y         , KC_X         , FR_DOT       , KC_K         ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
-    KC_LCTRL     , MO(LAYERS)   , KC_RCTRL     , KC_LGUI      , KC_MEH       ,                MO(SHRB4Z)            ,          KC_BSPACE                   , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , FR_PERC      ,
+    MO(B4AZ_S)   , FR_AGRV      , KC_Y         , KC_X         , FR_DOT       , KC_K         ,                                                 FR_QUOT      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
+    KC_LCTL      , MO(LAYERS)   , KC_RCTL      , KC_LGUI      , KC_MEH       ,                MO(SHRB4Z)            ,          KC_BSPC                     , KC_LEFT      , KC_DOWN      , KC_UP        , KC_RIGHT     , FR_PERC      ,
                                                                 KC_SPACE     , KC_LALT      , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , LT(B4AZ_A, KC_ENTER) , MO(B4AZ_S)
   ),
 //
@@ -175,10 +174,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [B4AZ_A] = LAYOUT_moonlander(
-    LT(SYMBOL, FR_DLR), FR_DQUO , FR_LESS      , FR_GRTR      , FR_LBRC      , FR_RBRC      , ____________          ,          ____________ , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
-    ____________ , FR_PIPE      , FR_EACU      , FR_AMP       , KC_O         , FR_EGRV      , ____________          ,          ____________ , KC_LBRC      , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
-    FR_W         , FR_A         , FR_UGRV      , S(KC_LBRC)   , FR_EURO      , FR_APOS      , ____________          ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , FR_TILD      , FR_M         ,
-    MO(B4AZ_S)   , FR_BSLS      , FR_LCBR      , FR_RCBR      , FR_TRIPLE_DOT, FR_TILD      ,                                                 FR_APOS      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
+    LT(SYMBOL, FR_DLR), FR_DQUO , FR_LABK      , FR_RABK      , FR_LBRC      , FR_RBRC      , ____________          ,          ____________ , FR_AT        , FR_PLUS      , FR_MINS      , FR_SLSH      , FR_ASTR      , FR_EQL       ,
+    ____________ , FR_PIPE      , FR_EACU      , FR_AMPR      , KC_O         , FR_EGRV      , ____________          ,          ____________ , KC_LBRC      , KC_V         , KC_D         , KC_L         , KC_J         , FR_Z         ,
+    FR_W         , FR_A         , FR_UGRV      , S(KC_LBRC)   , FR_EURO      , FR_QUOT      , ____________          ,          ____________ , KC_C         , KC_T         , KC_S         , KC_R         , FR_TILD      , FR_M         ,
+    MO(B4AZ_S)   , FR_BSLS      , FR_LCBR      , FR_RCBR      , FR_TRIPLE_DOT, FR_TILD      ,                                                 FR_QUOT      , FR_Q         , KC_G         , KC_H         , KC_F         , FR_CCED      ,
     ____________ , MO(LAYERS)   , ____________ , ____________ , ____________ ,                MO(SHRB4Z)            ,          ____________                , ____________ , ____________ , ____________ , ____________ , BP_PERC      ,
                                                                 FR_UNDS      , ____________ , ____________          ,          MO(VIM___)   , ____________ , MO(B4AZ_S)
   ),
@@ -205,12 +204,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [B4AZ_S] = LAYOUT_moonlander(
-    FR_HASH      , FR_1         , FR_2         , FR_3         , FR_4         , FR_5         , ____________          ,          S(KC_PGUP)   , FR_6         , FR_7         , FR_8         , FR_9         , FR_0         , FR_OVRR      ,
-    S(KC_TAB)    , S(KC_B)      , S(FR_E)      , S(KC_P)      , S(KC_O)      , S(KC_E)      , ____________          ,          S(KC_PGDOWN) , FR_EXLM      , S(KC_V)      , S(KC_D)      , S(KC_L)      , S(KC_J)      , S(FR_Z)      ,
+    FR_HASH      , FR_1         , FR_2         , FR_3         , FR_4         , FR_5         , ____________          ,          S(KC_PGUP)   , FR_6         , FR_7         , FR_8         , FR_9         , FR_0         , FR_DEG       ,
+    S(KC_TAB)    , S(KC_B)      , S(FR_E)      , S(KC_P)      , S(KC_O)      , S(KC_E)      , ____________          ,          S(KC_PGDN)   , FR_EXLM      , S(KC_V)      , S(KC_D)      , S(KC_L)      , S(KC_J)      , S(FR_Z)      ,
     S(FR_W)      , S(FR_A)      , S(KC_U)      , S(KC_I)      , S(KC_E)      , FR_SCLN      , S(KC_INSERT)          ,          ____________ , S(KC_C)      , S(KC_T)      , S(KC_S)      , S(KC_R)      , S(KC_N)      , S(FR_M)      ,
     ____________ , S(FR_A)      , S(KC_Y)      , S(KC_X)      , FR_COLN      , S(KC_K)      ,                                                 FR_QUES      , S(FR_Q)      , S(KC_G)      , S(KC_H)      , S(KC_F)      , S(KC_C)      ,
-    S(KC_LCTRL)  , MO(LAYERS)   , S(KC_RCTRL)  , S(KC_LGUI)   , S(KC_MEH)    ,                MO(TERM__)            ,          ____________                , S(KC_LEFT)   , S(KC_DOWN)   , S(KC_UP)     , S(KC_RIGHT)  , FR_GRV       ,
-                                                                WORD_NB_SPACE   , S(KC_LALT)   , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , S(KC_ENTER)  , ____________
+    S(KC_LCTL)   , MO(LAYERS)   , S(KC_RCTL)   , S(KC_LGUI)   , S(KC_MEH)    ,                MO(TERM__)            ,          ____________                , S(KC_LEFT)   , S(KC_DOWN)   , S(KC_UP)     , S(KC_RIGHT)  , FR_GRV       ,
+                                                                WORD_NB_SPACE, S(KC_LALT)   , LCTL_T(KC_ESCAPE)     ,          MO(VIM___)   , S(KC_ENTER)  , ____________
   ),
 //
 // Keymap SHRB4Z: Shortcuts for Bépo4Azerty
@@ -238,7 +237,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
-    KC_LSHIFT    , ____________ , LCTL(KC_X)   , LCTL(KC_C)   , LCTL(KC_V)   , ____________ ,                                                 ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
+    KC_LSFT      , ____________ , LCTL(KC_X)   , LCTL(KC_C)   , LCTL(KC_V)   , ____________ ,                                                 ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
     ____________ , ____________ , ____________ , SHRB4Z_WORD_MODE, ____________ ,                ____________          ,          ____________                , ____________ , ____________ , ____________ , ____________ , ____________ ,
                                                                 ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________
   ),
@@ -296,7 +295,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //
   [SYMBOL] = LAYOUT_moonlander(
     KC_ESCAPE    , KC_F1        , KC_F2        , KC_F3        , KC_F4        , KC_F5        , KC_HOME               ,          KC_PGUP      , KC_F6        , KC_F7        , KC_F8        , KC_F9        , KC_F10       , KC_F11       ,
-    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_END                ,          KC_PGDOWN    , KC_UP        , KC_KP_7      , KC_KP_8      , KC_KP_9      , KC_KP_PLUS   , KC_F12       ,
+    ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_END                ,          KC_PGDN      , KC_UP        , KC_KP_7      , KC_KP_8      , KC_KP_9      , KC_KP_PLUS   , KC_F12       ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_INSERT             ,          KC_DELETE    , KC_DOWN      , KC_KP_4      , KC_KP_5      , KC_KP_6      , KC_KP_MINUS  , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,                                                 ____________ , KC_KP_1      , KC_KP_2      , KC_KP_3    , KC_KP_ASTERISK , ____________ ,
     ____________ , MO(LAYERS)   , ____________ , ____________ , ____________ ,                ____________          ,          ____________                , KC_KP_0      , KC_KP_DOT    , KC_KP_EQUAL  , KC_KP_SLASH  , ____________ ,
@@ -307,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //
 // MS == Mouse
 //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-//│Audio tgl│         │         │         │         │         │         │             │         │         │         │         │         │         │  RESET  │
+//│Audio tgl│         │         │         │         │         │         │             │         │         │         │         │         │ Reboot  │ Bootldr │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //│Music tgl│         │         │  MS UP  │         │         │         │             │         │         │         │         │         │         │         │
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -326,9 +325,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                     ╚══════╩══════╩══════╝     ╚══════╩══════╩══════╝
 //
   [MEDIA_] = LAYOUT_moonlander(
-    AU_TOG       , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , RESET        ,
-    MU_TOG       , ____________ , ____________ , KC_MS_UP     , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
-    MU_MOD       , ____________ , KC_MS_LEFT   , KC_MS_DOWN   , KC_MS_RIGHT  , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_MEDIA_PLAY_PAUSE ,
+    AU_TOGG      , ____________ , ____________ , ____________ , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , QK_RBT       , QK_BOOT      ,
+    MU_TOGG      , ____________ , ____________ , KC_MS_UP     , ____________ , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
+    MU_NEXT      , ____________ , KC_MS_LEFT   , KC_MS_DOWN   , KC_MS_RIGHT  , ____________ , ____________          ,          ____________ , ____________ , ____________ , ____________ , ____________ , ____________ , KC_MEDIA_PLAY_PAUSE ,
     ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,                                                 ____________ , ____________ , KC_MEDIA_PREV_TRACK , KC_MEDIA_NEXT_TRACK , ____________ , ____________ ,
     ____________ , MO(LAYERS)   , ____________ , ____________ , ____________ ,                ____________          ,          ____________             , KC_AUDIO_VOL_UP , KC_AUDIO_VOL_DOWN , KC_AUDIO_MUTE , ____________ , ____________ ,
                                                                 KC_MS_BTN1   , KC_MS_BTN3   , KC_MS_BTN2            ,          ____________ , ____________ , KC_WWW_BACK
@@ -388,7 +387,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define I3_MOD LALT
   [TERM__] = LAYOUT_moonlander(
     ____________ , I3_MOD(KC_1) , I3_MOD(KC_2) , I3_MOD(KC_3) , I3_MOD(KC_4) , I3_MOD(KC_5) , ____________          ,         LSFT(KC_PGUP) , I3_MOD(KC_6) , I3_MOD(KC_7) , I3_MOD(KC_8) , I3_MOD(KC_9) , I3_MOD(KC_0) , ____________ ,
-    ____________ , I3_MOD(FR_A) , I3_MOD(FR_Z) , I3_MOD(KC_E) , I3_MOD(KC_R) , ____________ , ____________          ,       LSFT(KC_PGDOWN) , LCTL(LSFT(BP_C)) , LCTL(LSFT(BP_V)) , ____________ , ____________ , ____________ , ____________ ,
+    ____________ , I3_MOD(FR_A) , I3_MOD(FR_Z) , I3_MOD(KC_E) , I3_MOD(KC_R) , ____________ , ____________          ,         LSFT(KC_PGDN) , LCTL(LSFT(BP_C)) , LCTL(LSFT(BP_V)) , ____________ , ____________ , ____________ , ____________ ,
     ____________ , I3_MOD(FR_Q) , I3_MOD(KC_S) , I3_MOD(KC_D) , I3_MOD(KC_F) , ____________ , LSFT(KC_INSERT)       ,          ____________ , I3_MOD(KC_H) , I3_MOD(KC_J) , I3_MOD(KC_K) , I3_MOD(KC_L) , I3_MOD(FR_M) , ____________ ,
     ____________ , ____________ , I3_MOD(KC_X) , I3_MOD(KC_C) , I3_MOD(KC_V) , ____________ ,                                                 ____________ , ____________ , ____________ , ____________ , ____________ , ____________ ,
     ____________ , ____________ , ____________ , ____________ , ____________ ,                ____________          ,          ____________                , ____________ , ____________ , ____________ , ____________ , ____________ ,
@@ -471,6 +470,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ***************************************/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	  // If console is enabled, it will print the matrix position and status of each key pressed
+#ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+#endif
     switch (keycode) {
         case RST_LAYER:
             // Reset the layers to the default one
@@ -514,7 +517,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case MC_VIM_SAVE:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_DOT)) SS_DELAY(100) SS_TAP(X_RBRACKET)  SS_DELAY(100) SS_TAP(X_ENTER));
+				SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_DOT)) SS_DELAY(100) SS_TAP(X_RBRC)  SS_DELAY(100) SS_TAP(X_ENTER));
             }
             break;
         case MC_VIM_SV_QT:
@@ -573,13 +576,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  * LAYER MANAGEMENT
  ***************************************/
 
-uint32_t layer_state_set_user(uint32_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
     // Ensure NUMPAD Lock is enabled when switching to numpad layer
     //  © konstantin
     bool numpad = IS_LAYER_ON_STATE(state, SYMBOL);
-    bool num_lock = IS_HOST_LED_ON(USB_LED_NUM_LOCK);
-    if (numpad && ! num_lock) {
-         tap_code(KC_NLCK);  // Toggle Num Lock to match Numpad layer state
+    if (numpad && ! host_keyboard_led_state().num_lock) {
+         tap_code(KC_NUM);  // Toggle Num Lock to match Numpad layer state
     }
 
     return state;
@@ -674,7 +676,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 
 // make the transparent color macro for colors
 // Color key mapping
-const uint8_t PROGMEM ledmap[__LAYER_END__][DRIVER_LED_TOTAL][3] = {
+const uint8_t PROGMEM ledmap[__LAYER_END__][RGB_MATRIX_LED_COUNT][3] = {
   [BEPO__] = MAP_ALL_KEYS(C_LIGHT_RED),
 #define ____________ C_LIGHT_BLUE
   [B4AZER] = COL_LAYOUT_moonlander(
@@ -792,15 +794,15 @@ RGB get_key_color(int layer, int key) {
 }
 
 void set_layer_color(int layer) {
-  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+  for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
       // find the color for the current key and layer
       RGB rgb = get_key_color(layer, i);
       rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
   }
 }
 
-void rgb_matrix_indicators_user(void) {
-    if (g_suspend_state || keyboard_config.disable_layer_led) { return; }
+bool rgb_matrix_indicators_user(void) {
+    if (rgb_matrix_get_suspend_state() || keyboard_config.disable_layer_led) { return false; }
 
     uint8_t layer = biton32(ACTIVE_LAYER_STATE);
     // for layers (it should always be the case, use the color defined in
@@ -812,6 +814,7 @@ void rgb_matrix_indicators_user(void) {
         if (rgb_matrix_get_flags() == LED_FLAG_NONE)
             rgb_matrix_set_color_all(0, 0, 0);
     }
+	return true;
 }
 
 
@@ -864,7 +867,7 @@ typedef struct {
  * For the third point, there does exist the 'TD_DOUBLE_SINGLE_TAP', however this is not fully tested
  *
  */
-td_state_t cur_dance(qk_tap_dance_state_t *state) {
+td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
         // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
@@ -906,7 +909,7 @@ static td_tap_t dance_state[__TD_END__];
  *
  */
 #define _TD_MOD(name, reg_mod1, unreg_mod1, reg_mod2, unreg_mod2, reg_mod3, unreg_mod3)  \
-void x_tap_##name(qk_tap_dance_state_t *state, void *user_data) { \
+void x_tap_##name(tap_dance_state_t *state, void *user_data) { \
     switch (state->count) { \
         case 1: \
             reg_mod1; \
@@ -925,7 +928,7 @@ void x_tap_##name(qk_tap_dance_state_t *state, void *user_data) { \
             break; \
     } \
 } \
-void x_reset_##name(qk_tap_dance_state_t *state, void *user_data) { \
+void x_reset_##name(tap_dance_state_t *state, void *user_data) { \
     switch (dance_state[name].state) { \
         case TD_SINGLE_HOLD: unreg_mod1; break; \
         case TD_DOUBLE_HOLD: unreg_mod2; break; \
@@ -945,6 +948,6 @@ void x_reset_##name(qk_tap_dance_state_t *state, void *user_data) { \
 
 TD_MOD2(TD_SHF_ALT, MOD(RSFT), MOD2(RSFT, RALT))
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
         [TD_SHF_ALT] = TD_MOD_REF(TD_SHF_ALT),
 };
